@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """ usage:
-        cacpy [options] panel (settings|new-apicode|update-api-ip [IPADDR])
-        cacpy [options] api <apiargs>
+        cac-cli [options] panel (settings|new-apicode|update-api-ip [IPADDR])
+        cac-cli [options] api <apiargs>
 
 Options:
     --config PATH           Set configuration path
@@ -25,7 +25,7 @@ configuration is provided, cac-cli will look in ~/.config/cac/config.json
 """
 import sys,os,json
 from docopt import docopt
-from cacpy import CACPanel, CACPy
+from cacpanel import CACPanel
 from os.path import expanduser
 import logging
 
