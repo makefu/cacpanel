@@ -6,7 +6,9 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 log = logging.getLogger("CACPanel")
-GET_IP_URL = "http://icanhazip.com"
+
+# currently cac only supports ipv4
+GET_IP_URL = "http://ipv4.icanhazip.com"
 
 BASE_URL = "https://panel.cloudatcost.com"
 START_URL = BASE_URL + "/login.php"
