@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """ usage:
-        cac-cli [options] panel (settings|new-apicode|update-api-ip [IPADDR])
+        cac-cli [options] panel (settings|new-apicode)
+        cac-cli [options] panel (set-api-ip|add-api-ip) [IPADDR]
         cac-cli [options] api <apiargs>
 
 Options:
@@ -43,7 +44,6 @@ def json_out(obj):
     print(json.dumps(obj,indent=2))
 
 def handle_panel(cfg,args):
-    # cacpy [options] panel (settings|new-apicode|update-api-ip [IPADDR])
     mail, passwd = (cfg.get('email',None),cfg.get('password',None))
     if not (mail and passwd):
         log.error("Panel Requires Username and Password in configuration")
@@ -55,15 +55,26 @@ def handle_panel(cfg,args):
     elif args['new-apicode']:
         log.info("Generating new apicode")
         print(p.gen_apicode())
-    elif args['update-api-ip']:
+    elif args['set-api-ip']:
         ip = args['IPADDR']
-        if ip:
+        if ip is not None:
             log.info('setting API IP Address to {}'.format(ip))
             p.set_apiip(ip)
             print(ip)
         else:
             log.info('using current external ip as new api-ip')
             ret = p.set_apiip_to_ext()
+            log.info('new api ip: {}'.format(ret))
+            print(ret)
+    elif args['add-api-ip']:
+        ip = args['IPADDR']
+        if ip is not None:
+            log.info('updating API IP Address to {}'.format(ip))
+            p.add_apiip(ip)
+            print(ip)
+        else:
+            log.info('using current external ip as additional api-ip')
+            ret = p.add_apiip_to_ext()
             log.info('new api ip: {}'.format(ret))
             print(ret)
 

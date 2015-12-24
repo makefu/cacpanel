@@ -94,8 +94,17 @@ class CACPanel:
         # TODO test if ipv4 returned
         return self.set_apiip(ip)
 
+    def add_apiip_to_ext(self):
+        ip = self.s.get(GET_IP_URL).text.strip()
+        # TODO test if ipv4 returned
+        return self.add_apiip(ip)
+
     def set_apiip(self, ip):
         return self.set_settings({"APIIP": ip } )['APIIP']
+
+    def add_apiip(self, ip):
+        new_ips = ",".join(set(self.get_settings()['apiip'].split(',') + [ ip ]))
+        return self.set_settings({"APIIP": new_ips } )['APIIP']
 
     def set_settings(self, dic):
         """
