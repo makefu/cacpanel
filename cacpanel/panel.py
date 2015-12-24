@@ -103,7 +103,8 @@ class CACPanel:
         return self.set_settings({"APIIP": ip } )['APIIP']
 
     def add_apiip(self, ip):
-        new_ips = ",".join(set(self.get_settings()['apiip'].split(',') + [ ip ]))
+        new_ips = ",".join(filter(None,
+            set(self.get_settings()['apiip'].split(',') + [ ip ])))
         return self.set_settings({"APIIP": new_ips } )['APIIP']
 
     def set_settings(self, dic):
