@@ -49,7 +49,18 @@ class CACPanel:
         self.password = password
         self.s = None
         # Do not know about this one yet
-        self.login()
+        try:
+            self.login()
+        except requests.exceptions.SSLError as e:
+            import os.path,sys
+            import cacpanel
+            capath = os.path.dirname(cacpanel.__file__)
+            log.error("""Cannot validate panel.cloudatcost.com certificate.
+    As of 2016-02-03 this is a known issue.
+    try to in your environment:
+    REQUESTS_CA_BUNDLE="{}/workaround/panel.cloudatcost.com.crt"
+    If the problem persists you are getting hacked.""".format(capath))
+            sys.exit(1)
 
     def _init_session(self):
         self.s = requests.Session()

@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name = "cac-panel",
-    version = "0.4.2",
+    version = "0.4.3",
     author = "makefu",
     author_email = "github@syntax-fehler.de",
     description = ("A python lib and CLI for the panel.cloudatcost.com "
