@@ -2,11 +2,11 @@ import os
 from setuptools import setup
 
 setup(
-    name = "cacpanel",
-    version = "0.2.3",
+    name = "cac-panel",
+    version = "0.4.2",
     author = "makefu",
     author_email = "github@syntax-fehler.de",
-    description = ("A python wrapper and CLI for the panel.cloudatcost.com "
+    description = ("A python lib and CLI for the panel.cloudatcost.com "
         "https://panel.cloudatcost.com"),
     license = "WTFPL",
     keywords = "panel.cloudatcost.com screen-scraper",
@@ -20,7 +20,7 @@ setup(
         "Programming Language :: Python :: 3",
     ],
     entry_points = {
-        'console_scripts' : ['cac-cli = cacpanel.cli:main'],
+        'console_scripts' : ['cac-panel = cacpanel.cli:main'],
     },
 
     install_requires = ['requests','docopt','beautifulsoup4']

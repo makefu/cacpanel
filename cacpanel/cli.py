@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 """ usage:
-        cac-cli [options] panel (settings|new-apicode)
-        cac-cli [options] panel (set-api-ip|add-api-ip) [IPADDR]
-        cac-cli [options] api <apiargs>
+        cac-panel [options] (settings|new-apicode)
+        cac-panel [options] (set-api-ip|add-api-ip) [IPADDR]
 
 Options:
     --config PATH           Set configuration path
     --lol LOGLEVEL          Sets the log level [Default: WARN]
-
 
 
 the config is in json format and may contain the following variables:
@@ -30,7 +28,7 @@ from cacpanel import CACPanel
 from os.path import expanduser
 import logging
 
-log = logging.getLogger('cac-cli')
+log = logging.getLogger('cac-panel')
 
 def set_lol_from_string(lol):
     numeric_level = getattr(logging,lol.upper(),None)
@@ -93,8 +91,7 @@ def main():
     with open(cfgfile) as f:
         cfg = json.load(f)
 
-    if args['panel']: handle_panel(cfg,args)
-    elif args['api']: handle_api(cfg,args)
+    handle_panel(cfg,args)
 
 
 if __name__ == '__main__':
