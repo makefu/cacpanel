@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-""" usage:
+"""Usage:
         cac-panel [options] (settings|new-apicode)
         cac-panel [options] (set-api-ip|add-api-ip) [IPADDR]
 
@@ -12,15 +12,10 @@ the config is in json format and may contain the following variables:
     {
         "email":"",
         "password":"",
-        "apicode":""
     }
 
-Panel functionality requires 'email' and 'password' variables
-
-For full functionality password is required, apicode can be queried if
-necessary.
 Configuration can also be set as CAC_CONFIG environment variable. If no
-configuration is provided, cac-cli will look in ~/.config/cac/config.json
+configuration is provided, cac-panel will look in ~/.config/cac/config.json
 """
 import sys,os,json
 from docopt import docopt
@@ -88,8 +83,14 @@ def main():
                 expanduser('~/.config/cac/config.json'))
 
     log.info('using configuration path "{}"'.format(cfgfile))
-    with open(cfgfile) as f:
-        cfg = json.load(f)
+    try:
+        with open(cfgfile) as f:
+            cfg = json.load(f)
+    except:
+        log.error("Cannot read json config from `{}`.".format(cfgfile))
+        log.error("Make sure it is readable and in the correct format!\n")
+        print(__doc__)
+        sys.exit(1)
 
     handle_panel(cfg,args)
 
